@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Creepster&family=Luckiest+Guy&family=Bangers&display=swap');
+
+:root {
+    --bg-color: #0f172a;
+    --text-main: #f8fafc;
+    --accent: #38bdf8;
+    --danger: #ff0000;
+    --success: #22c55e;
+    --warning: #f59e0b;
+    --prep: #6366f1;
+}
+
+body[data-theme="mk"] { --bg-color: #0f172a; --accent: #38bdf8; }
+body[data-theme="op"] { --bg-color: #1e40af; --accent: #fbce07; }
+body[data-theme="pk"] { --bg-color: #2a75bb; --accent: #ffcb05; }
+body[data-theme="db"] { --bg-color: #1a1a1a; --accent: #ff8a00; }
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    transition: all 0.5s ease;
+}
+
+.hide-time { display: none !important; }
+
+#progress-container {
+    position: fixed; top: 0; left: 0; width: 100%; height: 12px;
+    background: rgba(255, 255, 255, 0.1); z-index: 2000;
+}
+
+#progress-bar {
+    width: 100%; height: 100%; background: var(--accent);
+    box-shadow: 0 0 15px var(--accent); transition: width 1s linear;
+}
+
+.container { display: flex; flex-direction: column; align-items: center; text-align: center; width: 90vw; }
+
+#round-display { font-size: 4rem; color: var(--accent); margin: 0; text-transform: uppercase; }
+
+#timer-display {
+    font-size: 18rem; font-weight: bold; margin: 10px 0;
+    font-variant-numeric: tabular-nums;
+}
+
+.timer-alerta {
+    color: var(--danger) !important;
+    text-shadow: 0 0 40px var(--danger);
+    animation: saltarAlerta 0.5s ease-in-out infinite;
+}
+
+@keyframes saltarAlerta {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.controls { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; justify-content: center; }
+
+button { padding: 12px 20px; font-weight: bold; border-radius: 8px; border: none; cursor: pointer; transition: 0.2s; }
+button:hover { filter: brightness(1.2); transform: translateY(-2px); }
+
+.main-btn { background: var(--success); color: white; }
+.danger-btn { background: var(--danger); color: white; }
+.warning-btn { background: var(--warning); color: white; }
+.secondary-btn { background: var(--accent); color: black; }
+.prep-btn { background: var(--prep); color: white; }
+
+#final-msg {
+    display: none; font-size: 8rem; margin: 20px 0; min-height: 12rem;
+    align-items: center; justify-content: center;
+}
+
+.show-final { display: flex !important; animation: focus-in 0.5s ease-out; }
+
+/* Ticker */
+.ticker-wrapper { 
+    position: fixed; bottom: 0; width: 100%; background: black; 
+    padding: 10px 0; overflow: hidden; border-top: 2px solid var(--accent); 
+}
+.ticker-content { display: flex; animation: ticker-move 30s linear infinite; }
+.ticker-content span { white-space: nowrap; padding-right: 50px; font-size: 1.2rem; font-weight: bold; }
+@keyframes ticker-move { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+.watermark { width: 180px; opacity: 0.2; margin-top: 10px; }
+.fs-fixed { position: fixed; top: 20px; right: 20px; opacity: 0.5; }
+.fs-fixed:hover { opacity: 1; }
+
+/* --- DISEÑOS DE MENSAJE FINAL PERSONALIZADOS --- */
+
+/* Estilo Base del mensaje */
+#final-msg {
+    display: none; 
+    font-size: 9rem; /* Un poco más grande */
+    margin: 20px 0;
+    text-align: center;
+    min-height: 12rem;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    z-index: 10;
+}
+
+/* Tema Mitos y Leyendas (Estilo Terror/Gótico) */
+body[data-theme="mk"] #final-msg { 
+    font-family: 'Creepster', cursive; 
+    color: #ff0000; 
+    text-shadow: 5px 5px 0px #000, 0 0 30px #ff0000; 
+}
+
+/* Tema One Piece (Estilo Luffy/Poster de Recompensa) */
+body[data-theme="op"] #final-msg { 
+    font-family: 'Luckiest Guy', cursive; 
+    color: #fbce07; 
+    -webkit-text-stroke: 4px #000; 
+    text-shadow: 8px 8px 0px #c8102e; 
+}
+
+/* Tema Pokemon (Estilo Clásico Azul/Amarillo) */
+body[data-theme="pk"] #final-msg { 
+    font-family: 'Luckiest Guy', cursive; 
+    color: #ffcb05; 
+    -webkit-text-stroke: 5px #2a75bb; 
+    text-shadow: 8px 8px 0px #3c5aa6; 
+}
+
+/* Tema Dragon Ball (Estilo Super Saiyan) */
+body[data-theme="db"] #final-msg { 
+    font-family: 'Bangers', cursive; 
+    color: #ff8a00; 
+    -webkit-text-stroke: 2px #000;
+    text-shadow: 4px 4px 0px #ff0000, 8px 8px 0px #000, 0 0 40px #ffea00; 
+}
+
+/* Animación de entrada */
+.show-final { 
+    display: flex !important; 
+    animation: impact-in 0.6s cubic-bezier(0.17, 0.89, 0.32, 1.49); 
+}
+
+@keyframes impact-in {
+    0% { transform: scale(0.3); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
